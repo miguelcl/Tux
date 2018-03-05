@@ -1,0 +1,44 @@
+#Introduction
+#Docker is a container-based software framework for automating deployment of applications. “Containers” are encapsulated, lightweight, and portable application modules.
+#Pre-Flight Check
+#As of June 2014 Docker has officially released v1.0.0.
+#These instructions are intended for installing Docker.
+#I’ll be working from a Liquid Web Core Managed CentOS 6.5 server, and I’ll be logged in as root.
+#Add the EPEL Repository
+#Docker is part of Extra Packages for Enterprise Linux (EPEL), which is a community repository of non-standard packages for the RHEL distribution. First, we’ll install the EPEL repository:
+rpm -iUvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+
+#Then, as a matter of best practice, we’ll update our packages:
+
+yum update -y
+
+#Installation
+#Now let’s install Docker by installing the docker-io package:
+
+yum -y install docker-io
+
+#Once the installation completes, we’ll need to start the Docker daemon:
+
+service docker start
+
+#And finally, and optionally, let’s configure Docker to start when the server boots:
+
+chkconfig docker on
+
+#Download a Docker Container
+#Let’s begin using Docker! Download the centos Docker image:
+
+docker pull centos
+
+#Run a Docker Container
+#Now, to setup a basic centos container with a bash shell, we just run one command. docker run will run a command in a new container, -i attaches stdin and stdout, -t allocates a tty, and we’re using the standard fedora container.
+
+docker run -i -t centos /bin/bash
+
+#That’s it! You’re now using a bash shell inside of a centos docker container.
+#To disconnect, or detach, from the shell without exiting use the escape sequence Ctrl-p + Ctrl-q.
+#There are many community containers already available, which can be found through a search. In the command below I am searching for the keyword centos:
+
+docker search centos
+
+
